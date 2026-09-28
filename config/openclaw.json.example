@@ -64,7 +64,19 @@
     ]
   },
   "tools": {
-    "profile": "coding"
+    "profile": "coding",
+    "fs": {
+      "workspaceOnly": true
+    },
+    "web": {
+      "search": {
+        "enabled": true,
+        "provider": "gemini"
+      },
+      "fetch": {
+        "enabled": true
+      }
+    }
   },
   "channels": {
     "line": {
@@ -77,7 +89,12 @@
       ],
       "groupAllowFrom": [
         "*"
-      ]
+      ],
+      "groups": {
+        "*": {
+          "requireMention": true
+        }
+      }
     }
   },
   "gateway": {

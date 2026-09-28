@@ -1,0 +1,43 @@
+# ==========================================
+# OpenClaw LINE Bot - Security GitIgnore
+# ==========================================
+
+# 1. 核心機密與金鑰檔案（絕對嚴禁提交）
+*.key
+*.pem
+*.token
+*.secret
+.env
+.env.*
+!.env.example
+*.csv
+
+# 2. 實體設定檔（只允許提交 .example 範本）
+openclaw.json
+!openclaw.json.example
+config/openclaw.json
+!config/openclaw.json.example
+gateway.cmd
+
+# 3. 對話記錄與動態記憶（保護個資）
+sessions/
+*.jsonl
+*.jsonl.*
+memory/
+!workspace/
+logs/
+*.log
+
+# 4. 運行環境與相依套件
+node_modules/
+dist/
+dist-runtime/
+.venv/
+__pycache__/
+
+# 5. 作業系統與 IDE 檔案
+.DS_Store
+Thumbs.db
+*.bak*
+.vscode/
+.idea/

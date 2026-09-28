@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "lastTouchedVersion": "2026.3.22"
+  },
+  "models": {
+    "mode": "merge",
+    "providers": {
+      "thu": {
+        "baseUrl": "https://api.ithu.tw/v1",
+        "apiKey": "YOUR_THU_API_KEY",
+        "api": "openai-completions",
+        "authHeader": true,
+        "models": [
+          {
+            "id": "vibe",
+            "name": "THU vibe (Inkling)",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 768000,
+            "maxTokens": 8192,
+            "api": "openai-completions"
+          },
+          {
+            "id": "vibecode",
+            "name": "THU vibecode (Inkling)",
+            "reasoning": false,
+            "input": ["text"],
+            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "contextWindow": 768000,
+            "maxTokens": 8192,
+            "api": "openai-completions"
+          }
+        ]
+      }
+    }
+  },
+  "agents": {
+    "defaults": {
+      "model": {
+        "primary": "thu/vibe",
+        "fallbacks": [
+          "thu/vibecode"
+        ]
+      },
+      "models": {
+        "thu/vibe": {},
+        "thu/vibecode": {}
+      },
+      "compaction": {
+        "mode": "safeguard"
+      }
+    },
+    "list": [
+      {
+        "id": "main",
+        "model": {
+          "primary": "thu/vibe",
+          "fallbacks": [
+            "thu/vibecode"
+          ]
+        }
+      }
+    ]
+  },
+  "tools": {
+    "profile": "coding"
+  },
+  "channels": {
+    "line": {
+      "enabled": true,
+      "dmPolicy": "open",
+      "channelSecret": "YOUR_LINE_CHANNEL_SECRET",
+      "channelAccessToken": "YOUR_LINE_CHANNEL_ACCESS_TOKEN",
+      "allowFrom": [
+        "*"
+      ],
+      "groupAllowFrom": [
+        "*"
+      ]
+    }
+  },
+  "gateway": {
+    "port": 18789,
+    "mode": "local",
+    "bind": "lan",
+    "auth": {
+      "mode": "token",
+      "token": "YOUR_GATEWAY_TOKEN"
+    }
+  },
+  "plugins": {
+    "entries": {
+      "line": {
+        "enabled": true
+      }
+    }
+  }
+}

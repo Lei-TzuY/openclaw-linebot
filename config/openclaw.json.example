@@ -1,7 +1,4 @@
 {
-  "meta": {
-    "lastTouchedVersion": "2026.3.22"
-  },
   "models": {
     "mode": "merge",
     "providers": {
@@ -14,19 +11,13 @@
           {
             "id": "vibe",
             "name": "THU vibe (Inkling)",
-            "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
             "contextWindow": 768000,
             "maxTokens": 8192,
             "api": "openai-completions"
           },
           {
             "id": "vibecode",
-            "name": "THU vibecode (Inkling)",
-            "reasoning": false,
-            "input": ["text"],
-            "cost": { "input": 0, "output": 0, "cacheRead": 0, "cacheWrite": 0 },
+            "name": "THU vibecode (Inkling Coder)",
             "contextWindow": 768000,
             "maxTokens": 8192,
             "api": "openai-completions"
@@ -42,29 +33,54 @@
         "fallbacks": [
           "thu/vibecode"
         ]
-      },
-      "models": {
-        "thu/vibe": {},
-        "thu/vibecode": {}
-      },
-      "compaction": {
-        "mode": "safeguard"
       }
     },
     "list": [
       {
         "id": "main",
-        "model": {
-          "primary": "thu/vibe",
-          "fallbacks": [
-            "thu/vibecode"
-          ]
-        }
+        "workspace": "/home/user/.openclaw/workspace"
+      },
+      {
+        "id": "family",
+        "workspace": "/home/user/.openclaw/workspace-family"
+      },
+      {
+        "id": "lab",
+        "workspace": "/home/user/.openclaw/workspace-lab"
       }
     ]
   },
+  "bindings": [
+    {
+      "agentId": "family",
+      "match": {
+        "channel": "line",
+        "accountId": "family"
+      }
+    },
+    {
+      "agentId": "lab",
+      "match": {
+        "channel": "line",
+        "accountId": "lab"
+      }
+    }
+  ],
   "tools": {
     "profile": "coding",
+    "deny": [
+      "sessions_send",
+      "sessions_spawn",
+      "sessions_list",
+      "sessions_history",
+      "memory_search",
+      "memory_get",
+      "exec",
+      "process",
+      "write",
+      "edit",
+      "apply_patch"
+    ],
     "fs": {
       "workspaceOnly": true
     },
@@ -81,27 +97,38 @@
   "channels": {
     "line": {
       "enabled": true,
-      "dmPolicy": "open",
-      "groupPolicy": "open",
-      "channelSecret": "YOUR_LINE_CHANNEL_SECRET",
-      "channelAccessToken": "YOUR_LINE_CHANNEL_ACCESS_TOKEN",
-      "allowFrom": [
-        "*"
-      ],
-      "groupAllowFrom": [
-        "*"
-      ],
-      "groups": {
-        "*": {
-          "requireMention": true
+      "accounts": {
+        "family": {
+          "enabled": true,
+          "name": "小爪 🦞 (家庭小幫手)",
+          "channelSecret": "YOUR_FAMILY_CHANNEL_SECRET",
+          "channelAccessToken": "YOUR_FAMILY_CHANNEL_ACCESS_TOKEN",
+          "webhookPath": "/line/family",
+          "dmPolicy": "open",
+          "groupPolicy": "open",
+          "allowFrom": ["*"],
+          "groupAllowFrom": ["*"],
+          "groups": {
+            "*": {
+              "requireMention": true
+            }
+          }
         },
-        "YOUR_FAMILY_GROUP_ID": {
-          "requireMention": true,
-          "systemPrompt": "這是一個家庭生活群組。你的身份是家庭智慧生活管家（小爪），風格親切溫馨，回答生活百科、食譜料理、健康與天氣建議。"
-        },
-        "YOUR_LAB_GROUP_ID": {
-          "requireMention": true,
-          "systemPrompt": "這是一個實驗室研究群組。你的身份是實驗室智慧研究助理（小爪），風格專業嚴謹，專注於代碼、演算法、論文與專題討論。"
+        "lab": {
+          "enabled": true,
+          "name": "小爪 🦞 (實驗室小助手)",
+          "channelSecret": "YOUR_LAB_CHANNEL_SECRET",
+          "channelAccessToken": "YOUR_LAB_CHANNEL_ACCESS_TOKEN",
+          "webhookPath": "/line/lab",
+          "dmPolicy": "open",
+          "groupPolicy": "open",
+          "allowFrom": ["*"],
+          "groupAllowFrom": ["*"],
+          "groups": {
+            "*": {
+              "requireMention": true
+            }
+          }
         }
       }
     }
@@ -109,11 +136,7 @@
   "gateway": {
     "port": 18789,
     "mode": "local",
-    "bind": "lan",
-    "auth": {
-      "mode": "token",
-      "token": "YOUR_GATEWAY_TOKEN"
-    }
+    "bind": "lan"
   },
   "plugins": {
     "entries": {

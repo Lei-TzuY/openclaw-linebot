@@ -94,6 +94,14 @@
       "groups": {
         "*": {
           "requireMention": true
+        },
+        "YOUR_FAMILY_GROUP_ID": {
+          "requireMention": true,
+          "systemPrompt": "這是一個家庭生活群組。你的身份是家庭智慧生活管家（小爪），風格親切溫馨，回答生活百科、食譜料理、健康與天氣建議。"
+        },
+        "YOUR_LAB_GROUP_ID": {
+          "requireMention": true,
+          "systemPrompt": "這是一個實驗室研究群組。你的身份是實驗室智慧研究助理（小爪），風格專業嚴謹，專注於代碼、演算法、論文與專題討論。"
         }
       }
     }

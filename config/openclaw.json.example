@@ -67,20 +67,9 @@
     }
   ],
   "tools": {
-    "profile": "coding",
-    "deny": [
-      "sessions_send",
-      "sessions_spawn",
-      "sessions_list",
-      "sessions_history",
-      "memory_search",
-      "memory_get",
-      "exec",
-      "process",
-      "read",
-      "write",
-      "edit",
-      "apply_patch"
+    "allow": [
+      "web_search",
+      "web_fetch"
     ],
     "fs": {
       "workspaceOnly": true

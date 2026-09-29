@@ -141,5 +141,11 @@
         "enabled": true
       }
     }
+  },
+  "messages": {
+    "queue": {
+      "mode": "followup",
+      "debounceMs": 1000
+    }
   }
 }
